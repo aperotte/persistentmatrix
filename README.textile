@@ -1,0 +1,73 @@
+h1. Persistent Matrix
+
+h2. Introduction
+
+PersistentMatrix aims to be a datatype written for the <a href="http://clojure.org">Clojure</a> Programming Language.  Clojure is a relatively new and exciting programming language.  It delivers elegantly on its six major features:
+
+# Dynamic Development
+# Functional Programming
+# Lisp
+# Runtime Polymorphism
+# Concurrent Programming
+# Hosted on the JVM
+
+The motivation behind this project is to complement Clojure already fantastic set of datatypes with another that has significantly different properties but maintains the core design principles of Clojure.
+
+One of the target use cases for the PersistentMatrix datatype is scientific computing.  The combination of Java's libraries and speed along with Clojure's elegance and flexibility could make an excellent environment for data processing and mathematical exploration.  One of the most promising aspects of a scientific environment in Clojure is being able to directly interface scientific exploration with practical application.  Anyone who finds themselves excited by this prospect shouldn't hesitate to learn more about Clojure as well as this datatype and contribute to the growth of the community.
+
+h2. Planned Features
+
+# Immutability
+# Primitive Support
+# N-Dimensional - Arbitrary number and size of dimensions (ie. ability to create a 4x3x5x6 datastructure)
+# N-Dimensional units (ie. ability to create a 10x10 matrix with 2x1 units to represent complex numbers)
+# Fast submatrix views via structural sharing (ie. constant time slicing, transposing, and other data manipulations)
+# Maintenance of both deep and superficial dimensionality (ie. slicing a 4x3x5x6 along the 3rd dimension will yield a datastructure with a superficial dimensionality of 3 and a deep dimensionality of 4)
+# Axis and element labeling and label indexing (ie. ability to label axes and elements of an axis with strings or any arbitrary object)
+# Implementing many of the clojure interfaces and thereby automatically inheriting much of the functionality of the standard library for data structures.
+
+h3. Getting Started
+
+Before exploring, you should be aware that this library is an early stage of development, and this brief tutorial assumes a functioning Clojure installation and a bit of knowledge about Clojure programming.
+
+Once you have persistentmatrix.jar in your CLASSPATH, you can begin by running the test.clj file at <code>src/clj/test.clj</code> by running <code>clojure test.clj</code> while in the <code>src/clj</code> directory.  You can then either inspect that file or continue on with this brief introduction.
+
+To import the datatype class enter the following at the REPL:
+<pre><code>(ns matrix
+  (:import
+   (persistentmatrix.core PersistentMatrix)))</code></pre>
+
+Then to create a new persistentmatrix object enter 
+
+<pre><code>(def m (PersistentMatrix/create (int-array [1]) [1 2 3 4 5 6 7 8 9 10] true))</code></pre>
+
+The arguments to this function are the unit shape, the things that will go into this array and a boolean indicating whether this matrix should contain primitive types or not.  The second argument which contains the elements of the array can be nested arbitrarily deeply and can be a nested array, a nested object that implements the List interface or a nested object that implements the ISeq interface.  This list includes virtually all of the collections in Java and Clojure.
+
+Next you can reshape this one dimensional persistentmatrix into something more interesting (2-dimensions, 5x2):
+
+<pre><code>(def m2 (.reshape m (int-array [5 2])))</code></pre>
+
+Next, let's add some labels to our dimensions:
+
+<pre><code>(def m2-w-al 
+   (.addLabels m2 
+      [:colors :shapes] 
+      [[:red :yellow :orange :green :blue] [:square :circle]]))</code></pre>
+
+This has the effect of adding labels to our 5x2 matrix where the first dimension is labeled colors and the 5 elements of that dimension are labeled red yellow orange green and blue and the second dimension is labeled shapes and the 2 elements of that dimension are square and circle.  You can access the stored labels with the methods getALabels and getELabels.
+
+In the words of the much admired Abelson and Sussman, "Programs must be written for people to read, and only incidentally for machines to execute."  In that spirit, support for labels have been included in the core library for the persistentmatrix.  The idea is that labels will do a great deal to ease human interaction with large amounts of complex data.
+
+As of yet, the labels do not do much, but the intention is to eventually make a matrix a function of it's idices and/or labels.  For example, one might access an element in a 3-dimensional persistentmatrix like this (note: this functionality doesn't actually exist yet!):
+
+<pre><code>(m 3 2 5)</code></pre>
+
+or like this:
+
+<pre><code>(m {:subject 3 :trial 2 :time 5})</code></pre>
+
+or like this:
+
+<pre><code>(m {:subject "third" :trial "second" :time "50 msec"})</code></pre>
+
+Have fun!
