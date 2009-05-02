@@ -43,6 +43,16 @@ Then to create a new persistentmatrix object enter
 
 The arguments to this function are the unit shape, the things that will go into this array and a boolean indicating whether this matrix should contain primitive types or not.  The second argument which contains the elements of the array can be nested arbitrarily deeply and can be a nested array, a nested object that implements the List interface or a nested object that implements the ISeq interface.  This list includes virtually all of the collections in Java and Clojure.
 
+If you'd like to access one of the elements of this array you can do it like this:
+
+<pre><code>(.index m (int-array [3]))</code></pre>
+
+and if you would like to slice into an array, you can do it like this:
+
+<pre><code>(nth m 3)</code></pre>
+
+where nth slices in the last dimension (in this case, the only dimension).
+
 Next you can reshape this one dimensional persistentmatrix into something more interesting (2-dimensions, 5x2):
 
 <pre><code>(def m2 (.reshape m (int-array [5 2])))</code></pre>
