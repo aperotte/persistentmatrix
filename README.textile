@@ -58,7 +58,7 @@ This has the effect of adding labels to our 5x2 matrix where the first dimension
 
 In the words of the much admired Abelson and Sussman, "Programs must be written for people to read, and only incidentally for machines to execute."  In that spirit, support for labels have been included in the core library for the persistentmatrix.  The idea is that labels will do a great deal to ease human interaction with large amounts of complex data.
 
-As of yet, the labels do not do much, but the intention is to eventually make a matrix a function of it's idices and/or labels.  For example, one might access an element in a 3-dimensional persistentmatrix like this (note: this functionality doesn't actually exist yet!):
+As of yet, the labels do not do much, but the intention is to eventually make a persistentmatrix a function of its indices and/or labels.  For example, one might access an element in a 3-dimensional persistentmatrix like this (note: this functionality doesn't actually exist yet!):
 
 <pre><code>(m 3 2 5)</code></pre>
 
