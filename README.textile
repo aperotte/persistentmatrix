@@ -26,7 +26,7 @@ h2. Planned Features
 # Axis and element labeling and label indexing (ie. ability to label axes and elements of an axis with strings or any arbitrary object)
 # Implementing many of the clojure interfaces and thereby automatically inheriting much of the functionality of the standard library for data structures.
 
-h3. Getting Started
+h2. Getting Started
 
 Before exploring, you should be aware that this library is an early stage of development, and this brief tutorial assumes a functioning Clojure installation and a bit of knowledge about Clojure programming.
 
